@@ -4,14 +4,14 @@ import sys
 import os
 
 from PIL import Image, ImageDraw, ImageFont
-from selenium import webdriver
+
+
+FONT_PATH = os.environ.get("FONT_PATH", "/System/Library/Fonts/ヒラギノ角ゴシック W7.ttc")
 
 
 class EmojiMoji():
     CANVAS_SIZE = 128
     FONT_SIZE = 64
-    FONT_PATH = '/System/Library/Fonts/ヒラギノ角ゴシック W7.ttc'
-
     def __init__(self):
         self.canvas = self._get_canvas()
 
@@ -34,7 +34,8 @@ class EmojiMoji():
         return Image.new('RGBA', (self.CANVAS_SIZE, self.CANVAS_SIZE), (0, 0, 0, 0))
 
     def _get_font(self):
-        return ImageFont.truetype(self.FONT_PATH, self.FONT_SIZE)
+        return ImageFont.truetype(FONT_PATH, self.FONT_SIZE)
+
 
 def get_profile_path(prof='default'):
     profile_dir = '{}/Library/Application Support/Firefox/Profiles/'.format(os.environ['HOME'])
@@ -42,26 +43,18 @@ def get_profile_path(prof='default'):
     profile_name = [fname for fname in files if fname.endswith(prof)][0]
     return os.path.join(profile_dir, profile_name)
 
+
 def main():
 
     params = sys.argv
-    if len(params) != 3:
-        print("[使い方 例]: python {} なるほど nrhd".format(params[0]))
+    if len(params) != 2:
+        print("[使い方 例]: python {} なるほど".format(params[0]))
         return
     text = params[1]
-    alias = params[2]
-    path = EmojiMoji().draw(text).save(os.path.dirname(os.path.abspath(__file__)), '{}.png'.format(alias))
+    EmojiMoji().draw(text).save(os.path.dirname(os.path.abspath(__file__)), '{}.png'.format(text))
+    print("{}.png".format(text))
+    print("https://lmnd.slack.com/admin/emoji に画像を登録してご利用下さい")
 
-    profile = webdriver.FirefoxProfile(get_profile_path())
-    browser = webdriver.Firefox(profile)
-    browser.get('https://slack.com/admin/emoji')
-    browser.find_element_by_id('emojiname').send_keys(alias)
-    browser.find_element_by_id('emojiimg').send_keys(path)
-    form = browser.find_element_by_id('addemoji')
-    submit = [tag for tag in form.find_elements_by_tag_name('input') if tag.get_attribute('type') == 'submit'][0]
-    submit.submit()
-    browser.close()
-    print(":{}: と打てば絵文字が使えるはず!".format(alias))
      
 
 if __name__ == '__main__':
