@@ -30,22 +30,14 @@ class EmojiMoji():
         self.canvas.save(write_to, 'PNG')
         return write_to
 
-    def _get_canvas(self):
+    def _get_canvas(self) -> Image:
         return Image.new('RGBA', (self.CANVAS_SIZE, self.CANVAS_SIZE), (0, 0, 0, 0))
 
-    def _get_font(self):
+    def _get_font(self) -> ImageFont:
         return ImageFont.truetype(FONT_PATH, self.FONT_SIZE)
 
 
-def get_profile_path(prof='default'):
-    profile_dir = '{}/Library/Application Support/Firefox/Profiles/'.format(os.environ['HOME'])
-    files = os.listdir(profile_dir)
-    profile_name = [fname for fname in files if fname.endswith(prof)][0]
-    return os.path.join(profile_dir, profile_name)
-
-
 def main():
-
     params = sys.argv
     if len(params) != 2:
         print("[使い方 例]: python {} なるほど".format(params[0]))
@@ -54,7 +46,6 @@ def main():
     EmojiMoji().draw(text).save(os.path.dirname(os.path.abspath(__file__)), '{}.png'.format(text))
     print("{}.png".format(text))
     print("https://lmnd.slack.com/admin/emoji に画像を登録してご利用下さい")
-
      
 
 if __name__ == '__main__':
