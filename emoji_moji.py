@@ -45,7 +45,7 @@ def main():
     text = params[1]
     EmojiMoji().draw(text).save(os.path.dirname(os.path.abspath(__file__)), '{}.png'.format(text))
     print("{}.png".format(text))
-    print("https://lmnd.slack.com/admin/emoji に画像を登録してご利用下さい")
+    print("https://slack.com/admin/emoji に画像を登録してご利用下さい")
      
 
 if __name__ == '__main__':

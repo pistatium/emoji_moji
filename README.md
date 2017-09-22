@@ -7,7 +7,7 @@
 $ python emoji_moji.py なるほど
 
 なるほど.png
-https://lmnd.slack.com/admin/emoji に画像を登録してご利用下さい
+https://slack.com/admin/emoji に画像を登録してご利用下さい
 ```
 
 生成された画像をSlackに登録することで絵文字として利用できます。
