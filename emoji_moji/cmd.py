@@ -43,7 +43,7 @@ def main():
         print("[使い方 例]: python {} なるほど".format(params[0]))
         return
     text = params[1]
-    EmojiMoji().draw(text).save(os.path.dirname(os.path.abspath(__file__)), '{}.png'.format(text))
+    EmojiMoji().draw(text).save(os.getcwd(), '{}.png'.format(text))
     print("{}.png".format(text))
     print("https://slack.com/admin/emoji に画像を登録してご利用下さい")
      
