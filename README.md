@@ -4,7 +4,7 @@
 
 ## 使い方
 ```bash
-$ python emoji_moji.py なるほど
+$ emoji_moji なるほど
 
 なるほど.png
 https://slack.com/admin/emoji に画像を登録してご利用下さい
@@ -23,5 +23,6 @@ cd emoji_moji
 pip3 install -e .
 ```
 
-
+## フォントを変える
+`FONT_PATH` に好きなフォントのパスを指定してください
 
