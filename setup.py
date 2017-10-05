@@ -2,7 +2,7 @@
 
 import os
 import sys
-from setuptools import setup
+from setuptools import setup, find_packages
 from pip.req import parse_requirements
 
 setup(
@@ -11,7 +11,8 @@ setup(
     url='https://github.com/pistatium/emoji_moji',
     author='pistatium',
     description='Convert chars to emoji image.',
-    packages=['emoji_moji'],
+    packages=find_packages('src'),
+    package_dir={'': 'src'},
     install_requires=[
         str(i.req) for i in parse_requirements(
             os.path.join(os.path.dirname(__file__), 'requirements.txt'), session=False) if not i.link

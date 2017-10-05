@@ -1,1 +1,2 @@
 pillow
+click==6.7
